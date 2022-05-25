@@ -83,3 +83,4 @@ while True:
 
         msg = f"Nie ma takiego uzytkownika".encode("utf8")
         client_socket.send(msg)
+

@@ -16,7 +16,7 @@ while True:
 
     client_socket.send(login)
 
-    zwrot = client_socket.recv(BUFFER).decode("utf8") 
+    zwrot = client_socket.recv(BUFFER).decode("utf8")
 
     print(zwrot)
 
@@ -29,6 +29,18 @@ while True:
 
         client_socket.send(haslo)
 
-        print(client_socket.recv(BUFFER))
+        # print(client_socket.recv(BUFFER))
+
+        proba2 = client_socket.recv(BUFFER).decode("utf8")
+
+        print(proba2)
+
+        if proba2 == "Podano zle haslo! Masz jeszcze jedna probe.":
+
+            haslo = input("Podaj swoje haslo:").encode("utf8")
+
+            client_socket.send(haslo)
+
+            print(client_socket.recv(BUFFER))
 
         break

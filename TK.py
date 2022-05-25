@@ -8,25 +8,27 @@ BUFFER = 1024
 client_socket = s.socket(s.AF_INET, s.SOCK_STREAM)
 client_socket.connect((HOST, PORT))
 
-print(f"Witaj w Banku Maroko!")
+while True:
 
-login = input("Wpisz swoj login: ").encode("utf8")
+    print(f"Witaj w Banku Maroko!")
 
-client_socket.send(login)
+    login = input("Wpisz swoj login: ").encode("utf8")
 
-print(client_socket.recv(BUFFER))
+    client_socket.send(login)
 
-# zwrot = BUFFER
-#
-# def user(zwrot):
-#
-#     if zwrot == "Nie ma takiego użytkownika":
-#         return
-#
-#     else:
+    zwrot = client_socket.recv(BUFFER).decode("utf8") 
 
-haslo = input("Podaj swoje haslo:").encode("utf8")
+    print(zwrot)
 
-client_socket.send(haslo)
+    if zwrot == "Nie ma takiego uzytkownika":
+        break
 
-print(client_socket.recv(BUFFER))
+    else:
+
+        haslo = input("Podaj swoje haslo:").encode("utf8")
+
+        client_socket.send(haslo)
+
+        print(client_socket.recv(BUFFER))
+
+        break

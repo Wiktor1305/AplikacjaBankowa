@@ -38,8 +38,23 @@ def logowanie(login):
     else:
         print(f"[{address[0]}:{address[1]}]> Podano nieprawidlowe haslo")
 
-        msg3 = f"Podano zle haslo!".encode("utf8")
+        msg3 = f"Podano zle haslo! Masz jeszcze jedna probe.".encode("utf8")
         client_socket.send(msg3)
+
+        haslo = client_socket.recv(BUFFER).decode("utf8")
+
+        if haslo == x:
+            print(f"[{address[0]}:{address[1]}]> Podano prawidlowe haslo")
+
+            msg2 = f"Poprawnie zalogowales sie do aplikacji".encode("utf8")
+            client_socket.send(msg2)
+
+        else:
+            print(f"[{address[0]}:{address[1]}]> Podano nieprawidlowe haslo")
+
+            msg3 = f"Podano zle haslo!".encode("utf8")
+            client_socket.send(msg3)
+
 
 
 HOST = "192.168.1.17"
